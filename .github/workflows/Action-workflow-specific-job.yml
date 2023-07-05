@@ -1,0 +1,25 @@
+name: My Global Action workflow to run a specific job
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name'
+        required: true
+        default: 'main'  # Set your default branch name here
+
+jobs:
+  my-action-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run My Action on Main Branch
+        if: ${{ github.event.inputs.branch == 'main' }}
+        run: echo "Running My Action on main branch"
+
+      - name: Run My Action on Other Branch
+        if: ${{ github.event.inputs.branch != 'main' }}
+        run: echo "Running My Action on branch ${{ github.event.inputs.branch }}"

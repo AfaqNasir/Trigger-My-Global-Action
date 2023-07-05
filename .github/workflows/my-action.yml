@@ -1,0 +1,20 @@
+name: My Global Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name'
+        required: true
+        default: 'main'  # Set your default branch name here
+
+jobs:
+  my-action-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run My Action
+        run: echo "Running My Action for branch ${{ github.event.inputs.branch }}"

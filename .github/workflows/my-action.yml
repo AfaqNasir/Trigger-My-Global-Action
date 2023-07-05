@@ -6,7 +6,7 @@ on:
       branch:
         description: 'Branch name'
         required: true
-        default: 'main'  # Set your default branch name here
+        default: 'my-global-action'  # Set your default branch name here
 
 jobs:
   my-action-job:

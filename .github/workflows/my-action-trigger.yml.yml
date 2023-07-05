@@ -1,4 +1,4 @@
-name: Trigger My Global Action
+name: My Global Action
 
 on:
   workflow_dispatch:
@@ -6,13 +6,15 @@ on:
       branch:
         description: 'Branch name'
         required: true
+        default: 'main'  # Set your default branch name here
 
 jobs:
-  trigger-action-job:
+  my-action-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger My Global Action
-        uses: your-username/my-global-action@main
-        with:
-          branch: ${{ github.event.inputs.branch }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run My Action
+        run: echo "Running My Action for branch ${{ github.event.inputs.branch }}"

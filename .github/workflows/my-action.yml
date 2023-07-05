@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch name'
+        description: 'my-global-action'
         required: true
         default: 'my-global-action'  # Set your default branch name here
 

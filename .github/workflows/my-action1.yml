@@ -1,4 +1,4 @@
-name: My Action
+name: My Action 1
 
 on:
   workflow_dispatch:

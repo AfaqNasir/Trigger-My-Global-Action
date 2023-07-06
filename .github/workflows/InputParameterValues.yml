@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run My Action
-        uses: your-username/my-action@main
+        uses: AfaqNasir/my-action@main
         with:
           first_name: ${{ github.event.inputs.first_name }}
           second_name: ${{ github.event.inputs.second_name }}

@@ -1,0 +1,25 @@
+name: Input Parameter Values
+
+on:
+  workflow_dispatch:
+    inputs:
+      first_name:
+        description: 'First name'
+        required: true
+      second_name:
+        description: 'Second name'
+        required: true
+
+jobs:
+  run-action-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run My Action
+        uses: your-username/my-action@main
+        with:
+          first_name: ${{ github.event.inputs.first_name }}
+          second_name: ${{ github.event.inputs.second_name }}

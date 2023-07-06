@@ -1,0 +1,27 @@
+name: My Other Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  my-other-action-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger My Action
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const response = await octokit.actions.createWorkflowDispatch({
+              owner: 'AfaqNasir',
+              repo: 'Trigger-My-Global-Action',
+              workflow_id: '.github/workflows/InputParameterValues.yml',  // Replace with the actual workflow ID of "My Action"
+              ref: 'main',  // Replace with the branch of "My Action"
+              inputs: {
+                first_name: 'Afaq',
+                second_name: 'Nasir'
+              }
+            });
+            console.log(response.data);

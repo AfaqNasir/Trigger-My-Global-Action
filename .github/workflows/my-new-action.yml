@@ -30,12 +30,14 @@ jobs:
             | jq -r ".workflow_runs[0].id")
 
           # Get the job ID of the specific job from the previous workflow run
+          #"https://api.github.com/repos/your-username/your-previous-action-repo/actions/runs/$previous_run_id/jobs"
           job_id=$(curl -s -X GET \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
-            "https://api.github.com/repos/your-username/your-previous-action-repo/actions/runs/$previous_run_id/jobs" \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \ 
+            "https://github.com/AfaqNasir/Trigger-My-Global-Action/actions/runs/5474489941/jobs/9969327005" \
             | jq -r ".jobs[] | select(.name==\"$job_name\") | .id")
 
           # Re-run the specific job from the previous action
           curl -X POST \
             -H "Authorization: Bearer $GITHUB_TOKEN" \
             "https://api.github.com/repos/your-username/your-previous-action-repo/actions/jobs/$job_id/retry"
+            

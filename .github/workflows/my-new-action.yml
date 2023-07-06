@@ -21,7 +21,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Set the job name to run
-          job_name="your-job-name"
+          job_name="my-action-job"
 
           # Get the previous workflow run ID of the previous action
           previous_run_id=$(curl -s -X GET \

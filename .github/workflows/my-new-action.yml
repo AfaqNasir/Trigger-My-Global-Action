@@ -1,0 +1,41 @@
+name: My New Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name'
+        required: true
+        default: 'main'  # Set your default branch name here
+
+jobs:
+  run-specific-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Specific Job from Previous Action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Set the job name to run
+          job_name="your-job-name"
+
+          # Get the previous workflow run ID of the previous action
+          previous_run_id=$(curl -s -X GET \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            "https://api.github.com/repos/your-username/your-previous-action-repo/actions/workflows/my-action.yml/runs?branch=your-branch-name" \
+            | jq -r ".workflow_runs[0].id")
+
+          # Get the job ID of the specific job from the previous workflow run
+          job_id=$(curl -s -X GET \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            "https://api.github.com/repos/your-username/your-previous-action-repo/actions/runs/$previous_run_id/jobs" \
+            | jq -r ".jobs[] | select(.name==\"$job_name\") | .id")
+
+          # Re-run the specific job from the previous action
+          curl -X POST \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            "https://api.github.com/repos/your-username/your-previous-action-repo/actions/jobs/$job_id/retry"

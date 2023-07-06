@@ -24,6 +24,7 @@ jobs:
           job_name="my-action-job"
 
           # Get the previous workflow run ID of the previous action
+          "https://api.github.com/repos/your-username/your-previous-action-repo/actions/workflows/my-action.yml/runs?branch=your-branch-name"
           previous_run_id=$(curl -s -X GET \
             -H "Authorization: Bearer $GITHUB_TOKEN" \
             "https://api.github.com/repos/your-username/your-previous-action-repo/actions/workflows/my-action.yml/runs?branch=your-branch-name" \
@@ -33,7 +34,7 @@ jobs:
           #"https://api.github.com/repos/your-username/your-previous-action-repo/actions/runs/$previous_run_id/jobs"
           job_id=$(curl -s -X GET \
             -H "Authorization: Bearer $GITHUB_TOKEN" \ 
-            "https://github.com/AfaqNasir/Trigger-My-Global-Action/actions/runs/5474489941/jobs/9969327005" \
+            https://api.github.com/Trigger-My-Global-Action/AfaqNasir/Trigger-My-Global-Action/actions/runs/5474489941/jobs" \
             | jq -r ".jobs[] | select(.name==\"$job_name\") | .id")
 
           # Re-run the specific job from the previous action

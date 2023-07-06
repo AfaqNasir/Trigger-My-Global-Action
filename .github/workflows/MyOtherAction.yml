@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+    
       - name: Trigger My Action
         uses: './.github/workflows/my-action1.yml'  # Replace with the actual path to "My Action" workflow file
         with:

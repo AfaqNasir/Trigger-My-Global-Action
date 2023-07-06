@@ -1,0 +1,21 @@
+name: Run My Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      my_input:
+        description: 'Input parameter'
+        required: true
+
+jobs:
+  run-action-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run My Action
+        uses: your-username/my-action@main
+        with:
+          my_input: ${{ github.event.inputs.my_input }}

@@ -14,10 +14,10 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const response = await octokit.actions.createWorkflowDispatch({
+            const response = await octokit.request('POST /repos/AfaqNasir/Trigger-My-Global-Action/actions/workflows/5475844018/dispatches', {
               owner: 'AfaqNasir',
               repo: 'Trigger-My-Global-Action',
-              workflow_id: '.github/workflows/InputParameterValues.yml',  // Replace with the actual workflow ID of "My Action"
+              workflow_id: '.github/workflows/InputParameterValues.yml',  // Replace with the actual workflow file path of "My Action"
               ref: 'main',  // Replace with the branch of "My Action"
               inputs: {
                 first_name: 'Afaq',

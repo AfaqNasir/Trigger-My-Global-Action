@@ -3,7 +3,7 @@ name: My Other Action
 on:
   push:
     branches:
-      - main
+      - new-test
 
 jobs:
   my-other-action-job:

@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.3
+        
       - name: Echo Input Parameters
         run: |
           echo "First name: ${{ github.event.inputs.first_name }}"
